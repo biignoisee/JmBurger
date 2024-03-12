@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Crear Pedido</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      $('.datetimepicker').datepicker({
+        format: 'YYYY-MM-DD',
+        sideBySide: true,
+        showClear: true
+      });
+    });
+  </script>
+
+  <style>
+    .container {
+      max-width: 95%;
+      margin-top: 30px;
+      font-family: 'Nunito Sans', sans-serif;
+    }
+    .navbar {
+      background-color: chocolate;
+      padding-left: 1rem;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/dashboard">JMBurger</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="/usuarios">Usuarios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/categorias">Categorías</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/detallepedidos">Detalle Pedidos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/detalleproduccion">Detalle Producción</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/pedidos">Pedidos</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/categoriausuarios">CAt Usuarios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/produccion">Producción</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/productos">Productos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/proveedores">Proveedores</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <h1>Crear Pedido</h1>
+  <form action="/pedidos/nuevo" method="post">
+    <div class="mb-3">
+      <label for="fechaPedido" class="form-label">Fecha pedido:</label>
+      <input type="text" class="form-control datetimepicker" id="fechaPedido" name="fechaPedido" required>
+    </div>
+    <div class="mb-3">
+      <label for="estadoPedido" class="form-label">Estado de Pedido:</label>
+      <select id="estadoPedido" name="estadoPedido" class="form-select" required>
+        <option value="pendiente">pendiente</option>
+        <option value="en_ejecucion">en_ejecucion</option>
+        <option value="entregado">entregado</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="comentarios" class="form-label">Comentarios:</label>
+      <input type="text" id="comentarios" name="comentarios" step="0.01" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="usuario" class="form-label">Nombre Usuario:</label>
+      <select id="usuario" name="usuario.nombreUsuario" class="form-select" required>
+        <option th:each="usuario : ${usuario}" th:value="${usuario.nombreUsuario}" th:text="${usuario.nombreUsuario}"></option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="proveedor" class="form-label">Nombre Proveedor:</label>
+      <select id="proveedor" name="proveedor.nombreProveedor" class="form-select" required>
+        <option th:each="proveedor : ${proveedor}" th:value="${proveedor.nombreProveedor}" th:text="${proveedor.nombreProveedor}"></option>
+      </select>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+  </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+</body>
+</html>

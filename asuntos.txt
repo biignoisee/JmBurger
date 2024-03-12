@@ -1,0 +1,1 @@
+hacer el tema de sesiones - es decir que tal usuario con tal rol puede acceder a tal vista mientras que el admin a todos
